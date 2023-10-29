@@ -22,11 +22,11 @@ public class GameRecord implements Comparable {
         GameRecord gr = (GameRecord) o;
         int grade = gr.getGrade();
         if (this.grade > grade) {
-            return 1;
+            return -1;
         } else if (this.grade == grade) {
             return 0;
         } else {
-            return -1;
+            return 1;
         }
     }
 

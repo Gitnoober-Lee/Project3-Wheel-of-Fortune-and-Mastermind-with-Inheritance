@@ -17,12 +17,13 @@ import java.util.Scanner;
 public abstract class WheelOfFortune extends Game {
 
     protected String phrase = "";
-    protected StringBuilder hiddenPhrase; //Don't need to be static
-    protected char[] previousGuess = new char[15]; // Record all guess letters.
+    protected StringBuilder hiddenPhrase;
+    protected char[] previousGuess = new char[20]; // Record all guess letters.
     protected boolean isAI = false;
     protected Scanner sc;
     private List<String> phraseList;
     protected String userName;
+    protected AllGameRecords allGameRecords;
 
 // public static void main(String[] args) {
     //     System.out.println("=== Welcome to Wheel of Fortune!!! === \r\n" +
@@ -43,6 +44,7 @@ public abstract class WheelOfFortune extends Game {
     // }
 
     public WheelOfFortune() {
+        allGameRecords = new AllGameRecords();
         // Get the phrase from a file of phrases
         try {
             phraseList = Files.readAllLines(Paths.get("phrases.txt"));
@@ -89,7 +91,7 @@ public abstract class WheelOfFortune extends Game {
     public GameRecord processGuess(Integer cntAsterisk) { //should process singular task, keep 15-20 lines
         boolean run = true; // While loop control boolean.
         String upperPhrase = phrase.toUpperCase();
-        int chances = 15; // Set guess chances.
+        int chances = 20; // Set guess chances.
         List<Character> prevMisses = new ArrayList<>(); // Record wrong guess letters.
         int count = 0; // Indicates how many characters are recorded in prevGuess char array.
         int missNum = 0; // Record the number of misses.
@@ -180,16 +182,15 @@ public abstract class WheelOfFortune extends Game {
 
     public AllGameRecords playAll() {
         printGreetings();
-        AllGameRecords allGameRecords = new AllGameRecords();
         for (String s : phraseList) {
             if (playNext()) {
                 phrase = s;
                 GameRecord record = play();
                 allGameRecords.add(record);
-                if (isAI){
+                if (isAI) {
                     WheelOfFortunePlayer player = getPlayer();
                     player.reset();
-                    previousGuess = new char[15];
+                    previousGuess = new char[20];
                 }
             } else {
                 break;

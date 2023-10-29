@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @Description:
  * @ClassName: WheelOfFortunePlayer2
@@ -7,9 +11,21 @@
  */
 public class WheelOfFortunePlayer2 implements WheelOfFortunePlayer {
 
+    private List<Character> letterList;
+    private int counter;
+
+    public WheelOfFortunePlayer2() {
+        letterList = new ArrayList<>();
+        for (int i = 0; i < 26; i++) {
+            letterList.add((char) ('A' + i));
+        }
+        counter = letterList.size() - 1;
+    }
+
     @Override
     public char nextGuess() {
-        return 0;
+        System.out.println(counter);
+        return letterList.get(counter--);
     }
 
     @Override
@@ -19,6 +35,6 @@ public class WheelOfFortunePlayer2 implements WheelOfFortunePlayer {
 
     @Override
     public void reset() {
-
+        counter = letterList.size() - 1;
     }
 }

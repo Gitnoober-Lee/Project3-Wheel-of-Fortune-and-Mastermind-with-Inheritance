@@ -92,4 +92,11 @@ public class AllGameRecords {
             return null;
         }
     }
+
+    @Override
+    public String toString() {
+        return "AllGameRecords{" +
+                "recordMap=" + recordMap +
+                '}';
+    }
 }

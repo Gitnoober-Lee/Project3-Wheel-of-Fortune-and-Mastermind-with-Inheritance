@@ -39,19 +39,22 @@ public class WheelOfFortuneAIGame extends WheelOfFortune {
 
         List<WheelOfFortunePlayer> playerList = new ArrayList<>();
         WheelOfFortunePlayer0 p0 = new WheelOfFortunePlayer0();
-        // WheelOfFortunePlayer1 p1 = new WheelOfFortunePlayer1();
+        WheelOfFortunePlayer1 p1 = new WheelOfFortunePlayer1();
         // WheelOfFortunePlayer2 p2 = new WheelOfFortunePlayer2();
         playerList.add(p0);
-        // playerList.add(p1);
+        playerList.add(p1);
         // playerList.add(p2);
         WheelOfFortuneAIGame wof = new WheelOfFortuneAIGame(playerList);
+        AllGameRecords records = new AllGameRecords();
         for (WheelOfFortunePlayer p : playerList) {
             wof.setUserName(p.playerId());
             wof.player = p;
-            AllGameRecords records = wof.playAll();
+            records = wof.playAll();
             System.out.println(records);
             p.reset();
         }
+        System.out.println("highGameList: " + records.highGameList(4));
+        System.out.println("average: " + records.average());
     }
 
     @Override
